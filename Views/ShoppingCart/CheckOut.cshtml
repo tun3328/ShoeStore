@@ -1,0 +1,140 @@
+﻿@using EShopperMCV.Models
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_EShopper_Layout.cshtml";
+}
+
+<section id="cart_items">
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                <li class="active">Check out</li>
+            </ol>
+        </div>
+
+        <!-- Step -->
+        <div class="step-one">
+            <h2 class="heading">Step 1</h2>
+        </div>
+
+        <!-- Cart Review -->
+        @if (Session["Cart"] != null)
+        {
+            var carts = (List<Cart>)Session["Cart"];
+            var total = carts.Sum(x => x.Quantity * x.Product.ProPrice);
+
+            <div class="review-payment">
+                <h2>Review & Payment</h2>
+            </div>
+
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="price">Price</td>
+                            <td class="quantity">Quantity</td>
+                            <td class="total">Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cart in carts)
+                        {
+                            var sub = cart.Quantity * cart.Product.ProPrice;
+                            <tr>
+                                <td class="cart_product">
+                                    <img src="~/images/shop/@cart.Product.ProImage" style="width:80px" />
+                                </td>
+                                <td class="cart_description">
+                                    <h4>@cart.Product.ProName</h4>
+                                </td>
+                                <td class="cart_price">
+                                    <p>@Html.FormatValue(cart.Product.ProPrice, "{0:C}")</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <p>@cart.Quantity</p>
+                                </td>
+                                <td class="cart_total">
+                                    <p class="cart_total_price">@Html.FormatValue(sub, "{0:C}")</p>
+                                </td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td colspan="3"></td>
+                            <td colspan="2">
+                                <table class="table table-condensed total-result">
+                                    <tr>
+                                        <td>Cart Sub Total</td>
+                                        <td>@Html.FormatValue(total, "{0:C}")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping Cost</td>
+                                        <td>Free</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td><span>@Html.FormatValue(total, "{0:C}")</span></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <h4>No items in your cart!</h4>
+        }
+
+        <!-- Customer Info -->
+        <div class="shopper-informations">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="shopper-info">
+                        <p>Customer Information</p>
+
+                        @using (Html.BeginForm("ProcessOrder", "ShoppingCart", FormMethod.Post, new { id = "customer-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <input type="text" name="cusName" placeholder="Customer Name" />
+                            <input type="text" name="cusPhone" placeholder="Phone" />
+                            <input type="email" name="cusEmail" placeholder="Email" />
+                            <input type="text" name="cusAddress" placeholder="Address" />
+
+                            <button type="submit" class="btn btn-primary">
+                                Process Order
+                            </button>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="order-message">
+                        <p>Shipping Order</p>
+                        <textarea rows="8" placeholder="Notes about your order"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    $("#customer-form").validate({
+        rules: {
+            cusName: { required: true },
+            cusPhone: { required: true },
+            cusEmail: { required: true, email: true },
+            cusAddress: { required: true }
+        }
+    });
+</script>

@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_EShopper_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            @Html.Action("GetCategories", "Product")
+            <div class="col-sm-9">
+                <div class="blog-post-area">
+                    <h2 class="title text-center">Latest From our Blog</h2>
+                    <div class="single-blog-post">
+                        <h3>New Sneaker Collection Now Available</h3>
+                        <div class="post-meta">
+                            <ul>
+                                <li><i class="fa fa-user"></i> Mac Doe</li>
+                                <li><i class="fa fa-clock-o"></i> 5:36 pm</li>
+                                <li><i class="fa fa-calendar"></i> JAN 10, 2014</li>
+                            </ul>
+                            <span>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </span>
+                        </div>
+                        <a href="">
+                            <img src="~/images/blog/blog1.jpg" alt="">
+                        </a>
+                        <p>
+                            Step into comfort and style with our latest shoe collection. Designed for everyday wear, our shoes feature breathable materials, 
+                            durable soles, and modern designs that keep you moving with confidence.
+                        </p>
+                        <a class="btn btn-primary" href="@Url.Action("Single", "Blog")">
+                            Read More
+                        </a>
+                    </div>
+                    <div class="single-blog-post">
+                        <h3>
+                            How to Choose the Perfect Running Shoes
+                        </h3>
+                        <div class="post-meta">
+                            <ul>
+                                <li><i class="fa fa-user"></i> Mac Doe</li>
+                                <li><i class="fa fa-clock-o"></i> 1:00 pm</li>
+                                <li><i class="fa fa-calendar"></i> DEC 10, 2013</li>
+                            </ul>
+                            <span>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </span>
+                        </div>
+                        <a href="">
+                            <img src="~/images/blog/blog2.jpg" alt="">
+                        </a>
+                        <p>Finding the right running shoes matters. Learn how proper cushioning, fit, and support can improve performance and protect your feet.</p>
+                        <a class="btn btn-primary" href="@Url.Action("Single", "Blog")">
+                            Read More
+                        </a>
+                    </div>
+                    <div class="single-blog-post">
+                        <h3>Shoe Care Tips to Make Your Shoes Last Longer</h3>
+                        <div class="post-meta">
+                            <ul>
+                                <li><i class="fa fa-user"></i> Mac Doe</li>
+                                <li><i class="fa fa-clock-o"></i> 1:50 pm</li>
+                                <li><i class="fa fa-calendar"></i> DEC 15, 2013</li>
+                            </ul>
+                            <span>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </span>
+                        </div>
+                        <a href="">
+                            <img src="~/images/blog/blog3.jpg" alt="">
+                        </a>
+                        <p>Keep your shoes looking new with simple care tips. Clean, store, and maintain your footwear to extend its lifespan.</p>
+                        <a class="btn btn-primary" href="@Url.Action("Single", "Blog")">
+                            Read More
+                        </a>
+                    </div>
+                    <div class="pagination-area">
+                        <ul class="pagination">
+                            <li><a href="" class="active">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">3</a></li>
+                            <li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
